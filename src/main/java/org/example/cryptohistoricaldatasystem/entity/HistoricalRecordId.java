@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-public class GoldenRecordId implements Serializable {
+public class HistoricalRecordId implements Serializable {
 
     private Instant timestamp;
     private String symbol;
 
-    public GoldenRecordId() {
+    public HistoricalRecordId() {
     }
 
-    public GoldenRecordId(Instant timestamp, String symbol) {
+    public HistoricalRecordId(Instant timestamp, String symbol) {
         this.timestamp = timestamp;
         this.symbol = symbol;
     }
@@ -38,7 +38,7 @@ public class GoldenRecordId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GoldenRecordId that = (GoldenRecordId) o;
+        HistoricalRecordId that = (HistoricalRecordId) o;
         return Objects.equals(timestamp, that.timestamp) &&
                 Objects.equals(symbol, that.symbol);
     }

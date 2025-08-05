@@ -1,7 +1,7 @@
 package org.example.cryptohistoricaldatasystem.service;
 
-import org.example.cryptohistoricaldatasystem.entity.GoldenRecord;
-import org.example.cryptohistoricaldatasystem.repository.GoldenRecordRepository;
+import org.example.cryptohistoricaldatasystem.entity.HistoricalRecord;
+import org.example.cryptohistoricaldatasystem.repository.HistoricalRecordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,14 +10,14 @@ import java.util.List;
 @Service
 public class VerificationService {
 
-    private final GoldenRecordRepository goldenRecordRepository;
+    private final HistoricalRecordRepository historicalRecordRepository;
 
-    public VerificationService(GoldenRecordRepository goldenRecordRepository) {
-        this.goldenRecordRepository = goldenRecordRepository;
+    public VerificationService(HistoricalRecordRepository historicalRecordRepository) {
+        this.historicalRecordRepository = historicalRecordRepository;
     }
 
     @Transactional
-    public void saveGoldenRecords(List<GoldenRecord> goldenRecords) {
-        goldenRecordRepository.saveAll(goldenRecords);
+    public void saveHistoricalRecords(List<HistoricalRecord> historicalRecords) {
+        historicalRecordRepository.saveAll(historicalRecords);
     }
 }

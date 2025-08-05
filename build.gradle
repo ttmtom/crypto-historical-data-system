@@ -1,10 +1,18 @@
-import java.util.Properties
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.7.3' // JDBC Driver for the plugin
+        classpath 'org.flywaydb:flyway-database-postgresql:11.10.5' // Flyway DB support for the plugin
+    }
+}
 
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.4'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'org.flywaydb.flyway' version '10.15.2'
+    id 'org.flywaydb.flyway' version '11.10.5'
 }
 
 group = 'org.example'
@@ -20,38 +28,23 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    flywayPlugin
-}
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.8.2'
-    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.postgresql:postgresql") // For the application at runtime (JPA)
+    implementation 'org.flywaydb:flyway-database-postgresql'
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    flywayPlugin "org.postgresql:postgresql:42.7.3"
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-def applicationProperties = new Properties()
-file("src/main/resources/application.properties").withInputStream {
-    applicationProperties.load(it)
-}
-
 flyway {
-    url = applicationProperties.getProperty("spring.datasource.url")
-    user = applicationProperties.getProperty("spring.datasource.username")
-    password = applicationProperties.getProperty("spring.datasource.password")
-    locations = ["filesystem:src/main/resources/db/migration"]
-}
-
-afterEvaluate {
-    flyway.pluginClasspath = configurations.flywayPlugin
+    url = 'jdbc:postgresql://localhost:5432/postgres'
+    user = 'timescaledb'
+    password = 'password'
 }

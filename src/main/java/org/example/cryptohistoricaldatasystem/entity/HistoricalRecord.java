@@ -9,9 +9,9 @@ import java.time.Instant;
 import java.util.Map;
 
 @Entity
-@Table(name = "golden_records")
-@IdClass(GoldenRecordId.class)
-public class GoldenRecord {
+@Table(name = "historical_records")
+@IdClass(HistoricalRecordId.class)
+public class HistoricalRecord {
 
     @Id
     private Instant timestamp;
