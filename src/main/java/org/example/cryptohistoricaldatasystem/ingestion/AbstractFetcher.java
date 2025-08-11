@@ -1,6 +1,6 @@
-package org.example.cryptohistoricaldatasystem.service.ingestion.fetcher;
+package org.example.cryptohistoricaldatasystem.ingestion;
 
-import org.example.cryptohistoricaldatasystem.service.ingestion.dto.Kline;
+import org.example.cryptohistoricaldatasystem.ingestion.dto.Kline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.reactive.function.client.WebClient;
