@@ -44,8 +44,17 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+if (file('.env').exists()) {
+    file('.env').readLines().each { line ->
+        def parts = line.split('=', 2)
+        if (parts.length == 2 && !parts[0].trim().startsWith('#')) {
+            project.ext[parts[0].trim()] = parts[1].trim()
+        }
+    }
+}
+
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/postgres'
-    user = 'timescaledb'
-    password = 'password'
+    url = project.hasProperty('DB_URL') ? project.property('DB_URL') : 'jdbc:postgresql://localhost:5432/postgres'
+    user = project.hasProperty('DB_USERNAME') ? project.property('DB_USERNAME') : 'timescaledb'
+    password = project.hasProperty('DB_PASSWORD') ? project.property('DB_PASSWORD') : 'password'
 }

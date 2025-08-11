@@ -6,7 +6,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: timescaledb
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_NAME:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-timescaledb}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
     volumes:
       - ./data:/var/lib/postgresql/data
