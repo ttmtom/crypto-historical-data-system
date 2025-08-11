@@ -36,6 +36,17 @@ dependencies {
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.8.2'
     runtimeOnly("org.postgresql:postgresql") // For the application at runtime (JPA)
     implementation 'org.flywaydb:flyway-database-postgresql'
+
+    def osName = System.getProperty("os.name").toLowerCase()
+    if (osName.contains("mac") || osName.contains("darwin")) {
+        def arch = System.getProperty("os.arch")
+        if (arch == "aarch64") {
+            runtimeOnly "io.netty:netty-resolver-dns-native-macos::osx-aarch_64"
+        } else {
+            runtimeOnly "io.netty:netty-resolver-dns-native-macos::osx-x86_64"
+        }
+    }
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 }

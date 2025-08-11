@@ -1,4 +1,4 @@
-package org.example.cryptohistoricaldatasystem.entity;
+package org.example.cryptohistoricaldatasystem.model;
 
 import java.io.Serializable;
 import java.time.Instant;

@@ -1,7 +1,7 @@
 package org.example.cryptohistoricaldatasystem.repository;
 
-import org.example.cryptohistoricaldatasystem.entity.HistoricalRecord;
-import org.example.cryptohistoricaldatasystem.entity.HistoricalRecordId;
+import org.example.cryptohistoricaldatasystem.model.HistoricalRecord;
+import org.example.cryptohistoricaldatasystem.model.HistoricalRecordId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

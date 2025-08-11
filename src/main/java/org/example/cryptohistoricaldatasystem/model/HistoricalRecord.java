@@ -1,4 +1,4 @@
-package org.example.cryptohistoricaldatasystem.entity;
+package org.example.cryptohistoricaldatasystem.model;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;

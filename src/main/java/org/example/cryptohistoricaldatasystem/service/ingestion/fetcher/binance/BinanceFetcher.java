@@ -17,10 +17,10 @@ public class BinanceFetcher extends AbstractFetcher {
     }
 
     @Override
-    protected Function<UriBuilder, URI> getUriFunction() {
+    protected Function<UriBuilder, URI> getUriFunction(String symbol) {
         return uriBuilder -> uriBuilder
                 .path("/api/v3/klines")
-                .queryParam("symbol", "BTCUSDT")
+                .queryParam("symbol", symbol)
                 .queryParam("interval", "1m")
                 .queryParam("limit", "1")
                 .build();

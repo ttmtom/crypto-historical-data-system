@@ -8,6 +8,7 @@ import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Flux;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.function.Function;
 
 public abstract class AbstractFetcher implements Fetcher {
@@ -23,14 +24,22 @@ public abstract class AbstractFetcher implements Fetcher {
 
     @Override
     public Flux<Kline> fetch() {
-        log.info("Fetching data from {}...", exchangeName);
-        return this.webClient.get()
-                .uri(getUriFunction())
-                .retrieve()
-                .bodyToFlux(Kline.class)
-                .doOnNext(kline -> log.info("Fetched {} kline: {}", exchangeName, kline))
-                .doOnError(error -> log.error("Error fetching from {}", exchangeName, error));
+        log.info("Fetching data from {} for all symbols...", exchangeName);
+        log.info(Arrays.toString(Coin.values()));
+        return Flux.fromArray(Coin.values())
+            .flatMap(this::fetchForSymbol);
     }
 
-    protected abstract Function<UriBuilder, URI> getUriFunction();
+    private Flux<Kline> fetchForSymbol(Coin coin) {
+        String symbol = coin.getSymbol();
+        log.debug("Fetching data from {} for symbol {}...", exchangeName, symbol);
+        return this.webClient.get()
+            .uri(getUriFunction(symbol))
+            .retrieve()
+            .bodyToFlux(Kline.class)
+            .doOnNext(kline -> log.info("Fetched {} kline for {}: {}", exchangeName, symbol, kline))
+            .doOnError(error -> log.error("Error fetching from {} for symbol {}", exchangeName, symbol, error));
+    }
+
+    protected abstract Function<UriBuilder, URI> getUriFunction(String symbol);
 }
