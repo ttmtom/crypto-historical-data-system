@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class VerificationService {
+public class HistoricalRecordService {
 
     private final HistoricalRecordRepository historicalRecordRepository;
 
-    public VerificationService(HistoricalRecordRepository historicalRecordRepository) {
+    public HistoricalRecordService(HistoricalRecordRepository historicalRecordRepository) {
         this.historicalRecordRepository = historicalRecordRepository;
     }
 

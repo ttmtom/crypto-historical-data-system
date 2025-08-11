@@ -1,0 +1,16 @@
+crypto:
+  sources:
+    binance:
+      enabled: true
+      url: "wss://stream.binance.com:443/stream"
+      streams:
+        - "btcusdt@kline_1m"
+        - "btcusdt@kline_5m"
+        - "ethusdt@kline_1m"
+        - "ethusdt@kline_5m"
+        - "solusdt@kline_1m"
+        - "solusdt@kline_5m"
+      autoReconnect: true
+      reconnectInitialDelay: 5000
+      reconnectMaxDelay: 90000
+      reconnectMultiplier: 2.0

@@ -7,14 +7,16 @@ import java.util.Objects;
 public class HistoricalRecordId implements Serializable {
 
     private Instant timestamp;
+    private String source;
     private String symbol;
 
     public HistoricalRecordId() {
     }
 
-    public HistoricalRecordId(Instant timestamp, String symbol) {
+    public HistoricalRecordId(Instant timestamp, String symbol, String source) {
         this.timestamp = timestamp;
         this.symbol = symbol;
+        this.source = source;
     }
 
     // Getters, setters, equals, and hashCode
@@ -34,17 +36,25 @@ public class HistoricalRecordId implements Serializable {
         this.symbol = symbol;
     }
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HistoricalRecordId that = (HistoricalRecordId) o;
         return Objects.equals(timestamp, that.timestamp) &&
-                Objects.equals(symbol, that.symbol);
+                Objects.equals(symbol, that.symbol) && Objects.equals(source, that.source);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(timestamp, symbol);
+        return Objects.hash(timestamp, source, symbol);
     }
 }

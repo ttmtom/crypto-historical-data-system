@@ -33,10 +33,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.8.2'
-    runtimeOnly("org.postgresql:postgresql") // For the application at runtime (JPA)
+    runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'org.flywaydb:flyway-database-postgresql'
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
 tasks.named('test') {
