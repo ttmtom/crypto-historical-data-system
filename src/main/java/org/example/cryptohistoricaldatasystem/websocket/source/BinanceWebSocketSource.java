@@ -44,7 +44,7 @@ public class BinanceWebSocketSource implements WebSocketSource {
                             Instant.ofEpochMilli(eventNode.get("E").asLong()),
                             this.getSourceName(),
                             klineNode,
-                            objectMapper.convertValue(eventNode, Map.class)
+                            objectMapper.convertValue(rootNode, Map.class)
                     );
 
                     return Optional.of(record);
