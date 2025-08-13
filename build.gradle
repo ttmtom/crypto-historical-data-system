@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.postgresql:postgresql:42.7.3' // JDBC Driver for the plugin
-        classpath 'org.flywaydb:flyway-database-postgresql:11.10.5' // Flyway DB support for the plugin
-    }
-}
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.4'
@@ -35,6 +25,9 @@ dependencies {
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.8.2'
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    // Use flyway-core for the core migration engine.
+    implementation 'org.flywaydb:flyway-core'
+    // Add PostgreSQL support for Flyway
     implementation 'org.flywaydb:flyway-database-postgresql'
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
